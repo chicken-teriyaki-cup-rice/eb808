@@ -12,6 +12,10 @@ class API:
 
         return response(environ, start_response)
 
+    def default_response(self, response):
+        response.status_code = 404
+        response.text = "Not found."
+
     def route(self, path):
         def wrapper(handler):
             self.routes[path] = handler

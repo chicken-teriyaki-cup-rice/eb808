@@ -20,11 +20,9 @@ class API:
         return wrapper
 
     def handle_request(self, request):
-        user_agent = request.environ.get(
-            "HTTP_USER_AGENT", "No User Agent Found"
-        )
-
         response = Response()
-        response.text = f"Hello, your user agent is: {user_agent}"
 
-        return response
+        for path, handler in self.routes.items():
+            if request.path == path:
+                handler(request, response)
+                return response

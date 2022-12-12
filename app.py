@@ -23,3 +23,12 @@ def greeting(request, response, name):
 def sum(request, response, a, b):
     total = int(a) + int(b)
     response.text = f"The sum of {a} and {b} is {total}"
+
+
+@app.route("/plant")
+class PlantsResource:
+    def get(self, req, resp):
+        resp.text = "Plants Page"
+
+    def post(self, req, resp):
+        resp.text = "Endpoint to create a new plant"

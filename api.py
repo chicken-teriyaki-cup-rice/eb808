@@ -14,8 +14,7 @@ class API:
         return response(environ, start_response)
 
     def route(self, path):
-        if path in self.routes:
-            raise AssertionError("Such route already exists.")
+        assert path not in self.routes, f"Path {path} already exists."
 
         def wrapper(handler):
             self.routes[path] = handler

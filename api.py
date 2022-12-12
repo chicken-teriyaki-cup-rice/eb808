@@ -43,8 +43,14 @@ class API:
 
         if handler is not None:
             if inspect.isclass(handler):
-                pass
-            handler(request, response, **kwargs)
+                handler_function = getattr(
+                    handler(), request.method.lower(), None
+                )
+                if handler_function is not None:
+                    raise AssertionError("Method not allowed", request.method)
+                handler_function(request, response, **kwargs)
+            else:
+                handler(request, response, **kwargs)
         else:
             self.default_response(response)
 

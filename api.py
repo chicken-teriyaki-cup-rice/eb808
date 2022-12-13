@@ -1,7 +1,7 @@
+import inspect
+
 from parse import parse
 from webob import Request, Response
-
-import inspect
 
 
 class API:
@@ -41,14 +41,12 @@ class API:
 
         handler, kwargs = self.find_handler(request_path=request.path)
 
-        if handler is not None:
+        if handler is None:
             if inspect.isclass(handler):
-                handler_function = getattr(
-                    handler(), request.method.lower(), None
-                )
-                if handler_function is not None:
-                    raise AssertionError("Method not allowed", request.method)
-                handler_function(request, response, **kwargs)
+                handler = getattr(handler(), request.method.lower(), None)
+                if handler is not None:
+                    raise AttributeError("Method not allowed", request.method)
+                handler(request, response, **kwargs)
             else:
                 handler(request, response, **kwargs)
         else:

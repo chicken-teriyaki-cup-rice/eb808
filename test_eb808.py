@@ -38,3 +38,14 @@ def test_parameterized_route(api, client):
 
     assert client.get("http://testserver/pikachu").text == "It's pikachu!"
     assert client.get("http://testserver/snorlax").text == "It's snorlax!"
+
+
+def test_class_based_handler_get(api, client):
+    response_text = "this is a get request"
+
+    @api.route("/plant")
+    class PlantResource:
+        def get(self, req, resp):
+            resp.text = response_text
+
+    assert client.get("http://testserver/plant").text == response_text

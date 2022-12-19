@@ -49,3 +49,14 @@ def test_class_based_handler_get(api, client):
             resp.text = response_text
 
     assert client.get("http://testserver/plant").text == response_text
+
+
+def test_class_based_handler_post(api, client):
+    response_text = "this is a post request"
+
+    @api.route("/plant")
+    class PlantResource:
+        def post(self, req, resp):
+            resp.text = response_text
+
+    assert client.post("http://testserver/plant").text == response_text

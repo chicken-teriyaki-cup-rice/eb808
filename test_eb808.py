@@ -29,3 +29,12 @@ def test_framework_test_client_can_send_requests(api, client):
         resp.text = RESPONSE_TEXT
 
     assert client.get("http://testserver/hey").text == RESPONSE_TEXT
+
+
+def test_parameterized_route(api, client):
+    @api.route("/{name}")
+    def hello(req, resp, name):
+        resp.text = f"It's {name}!"
+
+    assert client.get("http://testserver/pikachu").text == "It's pikachu!"
+    assert client.get("http://testserver/snorlax").text == "It's snorlax!"

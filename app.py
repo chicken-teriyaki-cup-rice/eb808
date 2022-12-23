@@ -32,3 +32,10 @@ class PlantsResource:
 
     def post(self, req, resp):
         resp.text = "Endpoint to create a new plant"
+
+
+def handler(req, resp):
+    resp.text = "sample"
+
+
+app.add_route("/sample", handler)

@@ -16,6 +16,13 @@ class API:
             loader=FileSystemLoader(os.path.abspath(templates_dir))
         )
 
+    def __call__(self, environ, start_response):
+        request = Request(environ)
+
+        response = self.handle_request(request)
+
+        return response(environ, start_response)
+
     def add_route(self, path, handler):
         assert path not in self.routes, "Such route already exists."
 

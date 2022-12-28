@@ -75,3 +75,6 @@ class API:
             context = {}
 
         return self.templates_env.get_template(template_name).render(**context)
+
+    def add_exception_handler(self, exception_handler):
+        self.exception_handler = exception_handler

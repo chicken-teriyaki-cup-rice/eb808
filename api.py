@@ -22,7 +22,7 @@ class API:
         self.whitenoise = WhiteNoise(self.wsgi_app, root=static_dir)
 
     def __call__(self, environ, start_response):
-        return self.wsgi_app(environ, start_response)
+        return self.whitenoise(environ, start_response)
 
     def wsgi_app(self, environ, start_response):
         request = Request(environ)

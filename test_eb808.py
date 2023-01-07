@@ -177,3 +177,6 @@ def test_middleware_methods_are_called(api, client):
 
     assert process_request_called is True
     assert process_response_called is True
+
+    def test_404_is_returned_for_nonexistent_static_file(client):
+    assert client.get(f'http://testserver/static/main.css)').status_code == 404

@@ -25,8 +25,24 @@ def sum(request, response, a, b):
     response.text = f"The sum of {a} and {b} is {total}"
 
 
+@app.route("/template")
+def template_handler(req, resp):
+    resp.body = app.template(
+        "index.html",
+        context={
+            "name": "eb808",
+            "title": "Native Hawaian Ethnobotany Framework",
+        },
+    ).encode()
+
+
+@app.route("/exception")
+def exception_throwing_handler(request, response):
+    raise AssertionError("This handler should not be used.")
+
+
 @app.route("/plant")
-class PlantsResource:
+class PlantsHandler:
     def get(self, req, resp):
         resp.text = "Plants Page"
 
@@ -39,22 +55,6 @@ def handler(req, resp):
 
 
 app.add_route("/sample", handler)
-
-
-@app.route("/template")
-def template_handler(req, resp):
-    resp.body = app.template(
-        "index.html",
-        context={
-            "name": "eb808",
-            "title": "Native Hawaiian Ethnobotany Framework",
-        },
-    ).encode()
-
-
-@app.route("/exception")
-def exception_throwing_handler(request, response):
-    raise AssertionError("This handler should not be used.")
 
 
 def custom_exception_handler(request, response, exception_cls):

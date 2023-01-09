@@ -3,6 +3,7 @@ import pytest
 from api import API
 from middleware import Middleware
 
+
 FILE_DIR = "css"
 FILE_NAME = "main.css"
 FILE_CONTENTS = "body {background-color: red}"
@@ -23,26 +24,26 @@ def _create_static(static_dir):
 def test_basic_route_adding(api):
     @api.route("/home")
     def home(req, resp):
-        resp.text = "Hello World!"
+        resp.text = "YOLO"
 
 
-def test_route_adding_with_same_path(api):
+def test_route_overlap_throws_exception(api):
     @api.route("/home")
     def home(req, resp):
-        resp.text = "Hello World!"
+        resp.text = "YOLO"
 
     with pytest.raises(AssertionError):
 
         @api.route("/home")
         def home2(req, resp):
-            resp.text = "Hello World!"
+            resp.text = "YOLO"
 
 
-def test_framework_test_client_can_send_requests(api, client):
-    RESPONSE_TEXT = "Hello World!"
+def test_eb808_test_client_can_send_requests(api, client):
+    RESPONSE_TEXT = "THIS IS COOL"
 
     @api.route("/hey")
-    def hey(req, resp):
+    def cool(req, resp):
         resp.text = RESPONSE_TEXT
 
     assert client.get("http://testserver/hey").text == RESPONSE_TEXT
@@ -51,14 +52,15 @@ def test_framework_test_client_can_send_requests(api, client):
 def test_parameterized_route(api, client):
     @api.route("/{name}")
     def hello(req, resp, name):
-        resp.text = f"It's {name}!"
+        resp.text = f"hey {name}"
 
-    assert client.get("http://testserver/pikachu").text == "It's pikachu!"
-    assert client.get("http://testserver/snorlax").text == "It's snorlax!"
+    assert client.get("http://testserver/matthew").text == "hey matthew"
+    assert client.get("http://testserver/ashley").text == "hey ashley"
 
 
 def test_default_404_response(client):
     response = client.get("http://testserver/doesnotexist")
+
     assert response.status_code == 404
     assert response.text == "Not found."
 
@@ -136,7 +138,7 @@ def test_custom_exception_handler(api, client):
 
 
 def test_404_is_returned_for_nonexistent_static_file(client):
-    assert client.get(f"http://testserver/main.css)").status_code == 404
+    assert client.get(f"http://testserver/static/main.css)").status_code == 404
 
 
 def test_assets_are_served(tmpdir_factory):
@@ -145,7 +147,7 @@ def test_assets_are_served(tmpdir_factory):
     api = API(static_dir=str(static_dir))
     client = api.test_session()
 
-    response = client.get(f"http://testserver/{FILE_DIR}/{FILE_NAME}")
+    response = client.get(f"http://testserver/static/{FILE_DIR}/{FILE_NAME}")
 
     assert response.status_code == 200
     assert response.text == FILE_CONTENTS
@@ -177,18 +179,3 @@ def test_middleware_methods_are_called(api, client):
 
     assert process_request_called is True
     assert process_response_called is True
-
-
-def test_404_is_returned_for_nonexistent_static_file(client):
-    assert client.get(f"http://testserver/static/main.css)").status_code == 404
-
-
-def test_assets_are_served(tmpdir_factory):
-    static_dir = tmpdir_factory.mktemp("static")
-    _create_static(static_dir)
-    api = API(static_dir=str(static_dir))
-    client = api.test_session()
-
-    response = client.get(f"http://testserver/static/{FILE_DIR}/{FILE_NAME}")
-    assert response.status_code == 200
-    assert response.text == FILE_CONTENTS

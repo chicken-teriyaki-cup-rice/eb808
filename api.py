@@ -46,9 +46,9 @@ class API:
 
         self.routes[path] = handler
 
-    def route(self, path):
+    def route(self, path, allowed_methods=None):
         def wrapper(handler):
-            self.add_route(path, handler)
+            self.add_route(path, handler, allowed_methods)
             return handler
 
         return wrapper

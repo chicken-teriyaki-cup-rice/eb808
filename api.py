@@ -81,6 +81,7 @@ class API:
         response = Response()
 
         handler_data, kwargs = self.find_handler(request_path=request.path)
+
         try:
             if handler_data is not None:
                 handler = handler_data["handler"]
@@ -91,6 +92,12 @@ class API:
                         raise AttributeError(
                             "Method not allowed", request.method
                         )
+                else:
+                    if request.method.lower() not in allowed_methods:
+                        raise AttributeError(
+                            "Method not allowed", request.method
+                        )
+
                 handler(request, response, **kwargs)
             else:
                 self.default_response(response)
@@ -99,6 +106,8 @@ class API:
                 raise e
             else:
                 self.exception_handler(request, response, e)
+
+        return response
 
     def test_session(self, base_url="http://testserver"):
         session = RequestsSession()

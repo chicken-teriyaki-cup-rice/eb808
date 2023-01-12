@@ -71,11 +71,10 @@ class API:
         response.text = "Not found."
 
     def find_handler(self, request_path):
-        for path, handler in self.routes.items():
+        for path, handler_data in self.routes.items():
             parse_result = parse(path, request_path)
             if parse_result is not None:
-                return handler, parse_result.named
-
+                return handler_data, parse_result.named
         return None, None
 
     def handle_request(self, request):

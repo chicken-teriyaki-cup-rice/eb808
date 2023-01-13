@@ -27,13 +27,23 @@ def sum(request, response, a, b):
 
 @app.route("/template")
 def template_handler(req, resp):
-    resp.body = app.template(
+    resp.html = app.template(
         "index.html",
         context={
             "name": "eb808",
             "title": "Native Hawaian Ethnobotany Framework",
         },
-    ).encode()
+    )
+
+
+@app.route("/json")
+def json_handler(req, resp):
+    resp.json = {"name": "data", "type": "JSON"}
+
+
+@app.route("/text")
+def text_handler(req, resp):
+    resp.text = "This is a simple text"
 
 
 @app.route("/exception")

@@ -202,3 +202,17 @@ def test_json_response_helper(api, client):
 
     assert response.headers["Content-Type"] == "application/json"
     assert json_body["name"] == "eb808"
+
+
+def test_html_response_helper(api, client):
+    @api.route("/html")
+    def html_handler(req, resp):
+        resp.html = api.template(
+            "index.html", context={"title": "Best Title", "name": "Best Name"}
+        )
+
+    response = client.get("http://testserver/html")
+
+    assert "text/html" in response.headers["Content-Type"]
+    assert "Best Title" in response.text
+    assert "Best Name" in response.text

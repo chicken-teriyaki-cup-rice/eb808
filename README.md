@@ -35,12 +35,13 @@ app = API()
 @app.route("/")
 def home(req, resp):
     resp.text = "Hello, this is my home page."
-
-@app.route("/json")
-def json_handler(req, resp):
-    resp.json = {"this": "is JSON"}
 ```
 
+```ruby
+# templates/index.html
+<h1>hello, world!</h1>
+```
+ 
 Start:
 
 ```bash

@@ -5,7 +5,7 @@
 
 # eb808
 
-eb808 is a simple and user-friendly Python web framework designed for educational purposes. Built on the WSGI standard, it seamlessly integrates with popular application servers such as Gunicorn, making it easy to deploy and scale your web applications. Whether you're a beginner or an experienced developer, eb808 offers the flexibility and functionality to bring your ideas to life.
+eb808 is a simple and user-friendly Python web framework designed for educational purposes. Built on the WSGI standard, it seamlessly integrates with popular application servers such as Gunicorn, making it easy to deploy and scale your web applications. I created this framework to teach myself how web frameworks work. However, my ultimate goal is to use this framework as a foundation for a unique and valuable resource: an API dedicated to the study and preservation of native Hawaiian ethnobotany. This API will provide access to a vast collection of information on the traditional uses of native Hawaiian plants, promoting a deeper understanding and appreciation of the rich cultural heritage of Hawaii. This framework serves as the resilient and flexible foundation for the native Hawaiian ethnobotany platform.
 
 ## Quick Start
 

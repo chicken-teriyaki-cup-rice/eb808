@@ -1,5 +1,5 @@
 <p align="center">
-![cover](https://user-images.githubusercontent.com/91502105/212605309-5b8c4af8-4767-4aac-a8f0-5ee98791e58b.png)
+<img src="https://user-images.githubusercontent.com/91502105/212605309-5b8c4af8-4767-4aac-a8f0-5ee98791e58b.png?raw=True">
 </p>
 ---
 

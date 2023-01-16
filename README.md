@@ -16,7 +16,7 @@ This API will provide access to a lot of information on traditional uses of plan
 Install it:
 
 ```bash
-pip install eb808==0.0.2
+pip install eb808==0.0.3
 ```
 
 Basic Usage:

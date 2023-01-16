@@ -2,6 +2,8 @@
 <img src="https://user-images.githubusercontent.com/91502105/212608083-3fcced54-7407-47ea-adc3-0178aaaf886a.jpg?raw=True">
 </p>
 ---
+https://badgen.net/badge/version/0.0.3/blue
+https://badgen.net/badge/build/passing/green
 
 # eb808
 

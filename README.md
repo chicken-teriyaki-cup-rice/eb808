@@ -5,8 +5,7 @@
 
 # eb808
 
-eb808 is a Python Web Framework built for learning purposes. 
-It is a WSGI framework and can be used with any WSGI application server such as Gunicorn.
+eb808 is a simple and user-friendly Python web framework designed for educational purposes. Built on the WSGI standard, it seamlessly integrates with popular application servers such as Gunicorn, making it easy to deploy and scale your web applications. Whether you're a beginner or an experienced developer, eb808 offers the flexibility and functionality to bring your ideas to life.
 
 ## Quick Start
 

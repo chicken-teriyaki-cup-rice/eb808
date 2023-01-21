@@ -10,3 +10,15 @@ def test_create_db():
 
     assert isinstance(db.conn, sqlite3.Connection)
     assert db.tables == []
+
+
+# fixtures
+
+
+@pytest.fixture
+def Taxonomy():
+    class Taxonomy(Table):
+        name = Column(str)
+        ott_id = Column(int)
+
+    return Taxonomy
